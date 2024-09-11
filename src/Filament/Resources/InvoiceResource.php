@@ -61,7 +61,7 @@ class InvoiceResource extends Resource
         ];
     }
 
-    public static function getNavigationGroup()
+    public static function getNavigationGroup(): ?string
     {
         return trans('filament-invoices::messages.invoices.group');
     }
