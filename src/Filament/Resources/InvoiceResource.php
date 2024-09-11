@@ -77,7 +77,7 @@ class InvoiceResource extends Resource
                     ->unique(ignoreRecord: true)
                     ->disabled(fn(Invoice $invoice) => $invoice->exists)
                     ->label(trans('filament-invoices::messages.invoices.columns.uuid'))
-                    ->default(fn() => 'INV-' . \Illuminate\Support\Str::random(8))
+                    ->default(fn() => \Illuminate\Support\Str::random(12))
                     ->required()
                     ->columnSpanFull()
                     ->maxLength(255),
@@ -99,7 +99,6 @@ class InvoiceResource extends Resource
                                 ->label(trans('filament-invoices::messages.invoices.sections.from_type.columns.from'))
                                 ->required()
                                 ->searchable()
-                                ->disabled(fn(Forms\Get $get) => !$get('from_type'))
                                 ->options(fn(Forms\Get $get) => $get('from_type') ? $get('from_type')::query()->pluck(FilamentInvoices::getFrom()->where('model', $get('from_type'))->first()?->column ?? 'name', 'id')->toArray() : [])
                                 ->columnSpanFull(),
                         ])
@@ -131,7 +130,6 @@ class InvoiceResource extends Resource
                                         $set('address', $for->address);
                                     }
                                 })
-                                ->disabled(fn(Forms\Get $get) => !$get('for_type'))
                                 ->options(fn(Forms\Get $get) => $get('for_type') ? $get('for_type')::query()->pluck(FilamentInvoices::getFor()->where('model', $get('for_type'))->first()?->column ?? 'name', 'id')->toArray() : [])
                                 ->columnSpanFull(),
                         ])

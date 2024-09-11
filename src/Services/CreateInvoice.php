@@ -120,10 +120,10 @@ class CreateInvoice
 
     public function save()
     {
-       $uuid = 'INV-'. \Illuminate\Support\Str::random(8);
+       $uuid = \Illuminate\Support\Str::random(12);
        $checkUUID = Invoice::query()->where('uuid', $uuid)->first();
        while($checkUUID){
-          $uuid = 'INV-'. \Illuminate\Support\Str::random(8);
+          $uuid = \Illuminate\Support\Str::random(12);
           $checkUUID = Invoice::query()->where('uuid', $uuid)->first();
        }
        $invoice = new Invoice();

@@ -19,11 +19,11 @@ return new class extends Migration
 
             $table->string('uuid')->unique();
 
-            $table->morphs('for');
-            $table->morphs('from');
+            $table->uuid('for_id');
+            $table->uuid('form_id');
 
             //Link
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->uuid('user_id');
             $table->unsignedBigInteger('branch_id')->nullable();
             $table->foreignId('category_id')->nullable()->constrained('types')->onDelete('cascade');
 
