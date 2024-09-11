@@ -61,6 +61,11 @@ class InvoiceResource extends Resource
         ];
     }
 
+    public static function getNavigationGroup()
+    {
+        return trans('filament-invoices::messages.invoices.group');
+    }
+
     public static function form(Form $form): Form
     {
         $types = Type::query()
