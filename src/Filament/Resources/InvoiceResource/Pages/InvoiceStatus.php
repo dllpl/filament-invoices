@@ -58,7 +58,7 @@ class InvoiceStatus extends Page implements HasTable
             Action::make('back')
                 ->action(fn()=> redirect()->to(InvoiceResource::getUrl('index')))
                 ->color('danger')
-                ->label(trans('filament-settings-hub::messages.back')),
+                ->label(trans('filament-invoices::messages.back')),
         ];
     }
 
