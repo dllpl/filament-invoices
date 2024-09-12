@@ -2,6 +2,7 @@
 
 namespace TomatoPHP\FilamentInvoices\Filament\Resources\InvoiceResource\Pages;
 
+use Filament\Resources\Components\Tab;
 use TomatoPHP\FilamentInvoices\Facades\FilamentInvoices;
 use TomatoPHP\FilamentInvoices\Filament\Resources\InvoiceResource;
 use Filament\Actions;
@@ -24,6 +25,15 @@ class ListInvoices extends ListRecords
     {
         return [
             InvoiceResource\Widgets\InvoiceStatsWidget::class
+        ];
+    }
+
+    public function getTabs(): array
+    {
+        return [
+            null => Tab::make('Актуальные'),
+            'Все счета' => Tab::make()->query(fn ($query) => $query->whereNotNull('deleted_at')->orWhereNull('deleted_at')),
+            'Удаленые' => Tab::make()->query(fn ($query) => $query->whereNotNull('deleted_at')),
         ];
     }
 

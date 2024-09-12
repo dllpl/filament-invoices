@@ -41,6 +41,7 @@
         "tomatophp/console-helpers": "^1.1",
         "tomatophp/filament-locations": "^1.0",
         "tomatophp/filament-types": "^1.0",
-        "filament/filament": "^3.0.0"
+        "filament/filament": "^3.0.0",
+        "malzariey/filament-daterangepicker-filter": "^3.0"
     }
 }
