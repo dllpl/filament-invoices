@@ -82,7 +82,7 @@ class InvoiceResource extends Resource
                     ->unique(ignoreRecord: true)
                     ->disabled(fn(Invoice $invoice) => $invoice->exists)
                     ->label(trans('filament-invoices::messages.invoices.columns.uuid'))
-                    ->default(fn() => \Illuminate\Support\Str::random(12))
+                    ->default(fn() => '№' . (Invoice::count() + 1) . ' от ' . date('d.m.Y'))
                     ->required()
                     ->columnSpanFull()
                     ->maxLength(255),
@@ -120,9 +120,8 @@ class InvoiceResource extends Resource
                                 ->searchable()
                                 ->required()
                                 ->live()
-                                ->default(fn() => FilamentInvoices::getFrom()->first()?->model ?? null)
+                                ->default(fn() => FilamentInvoices::getFor()->first()?->model ?? null)
                                 ->options(FilamentInvoices::getFor()->pluck('label', 'model')->toArray())
-                                ->disabled()
                                 ->columnSpanFull(),
                             Forms\Components\Select::make('for_id')
                                 ->label(trans('filament-invoices::messages.invoices.sections.billed_from.columns.for'))
@@ -135,6 +134,7 @@ class InvoiceResource extends Resource
                                     if ($forType && $forId) {
                                         $for = $forType::find($forId);
                                         $set('name', $for->name);
+                                        $set('phone', $for->phone);
                                         $set('inn', $for->inn);
                                         $set('ogrn', $for->ogrn);
                                     }
@@ -149,11 +149,24 @@ class InvoiceResource extends Resource
                     Forms\Components\Section::make(trans('filament-invoices::messages.invoices.sections.customer_data.title'))
                         ->schema([
                             Forms\Components\TextInput::make('name')
-                                ->label(trans('filament-invoices::messages.invoices.sections.customer_data.columns.name')),
+                                ->label(trans('filament-invoices::messages.invoices.sections.customer_data.columns.name'))
+                                ->required()->maxLength(255),
+                            Forms\Components\TextInput::make('phone')
+                                ->label(trans('filament-invoices::messages.invoices.sections.customer_data.columns.phone'))
+                                ->type('tel')
+                                ->required()
+                                ->mask('+7 (999) 999-99-99')
+                                ->maxLength(255),
                             Forms\Components\TextInput::make('inn')
-                                ->label(trans('filament-invoices::messages.invoices.sections.customer_data.columns.inn')),
+                                ->label(trans('filament-invoices::messages.invoices.sections.customer_data.columns.inn'))
+                                ->mask('999999999999')
+                                ->minLength(10)
+                                ->maxLength(12),
                             Forms\Components\TextInput::make('ogrn')
-                                ->label(trans('filament-invoices::messages.invoices.sections.customer_data.columns.ogrn')),
+                                ->label(trans('filament-invoices::messages.invoices.sections.customer_data.columns.ogrn'))
+                                ->minLength(13)
+                                ->mask('999999999999999')
+                                ->maxLength(15),
                         ])
                         ->columns(1)
                         ->columnSpan(6)
@@ -186,7 +199,6 @@ class InvoiceResource extends Resource
                                 ->required()
                                 ->columnSpanFull()
                                 ->default(Currency::query()->where('iso', 'руб.')->first()?->id)
-                                ->disabled()
                                 ->options(Currency::query()->pluck('name', 'id')->toArray()),
                         ])
                         ->columns(2)
@@ -362,12 +374,12 @@ class InvoiceResource extends Resource
 //                    ->sortable(),
                 Tables\Columns\TextColumn::make('paid')
                     ->label(trans('filament-invoices::messages.invoices.columns.paid'))
-                    ->money(locale: 'en', currency: (fn($record) => $record->currency?->iso))
+                    ->money(locale: 'ru', currency: (fn($record) => $record->currency?->iso))
                     ->color('info')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('total')
                     ->label(trans('filament-invoices::messages.invoices.columns.total'))
-                    ->money(locale: 'en', currency: (fn($record) => $record->currency?->iso))
+                    ->money(locale: 'ru', currency: (fn($record) => $record->currency?->iso))
                     ->color('success')
                     ->sortable(),
 

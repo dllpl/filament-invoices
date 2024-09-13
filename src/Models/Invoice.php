@@ -188,4 +188,14 @@ class Invoice extends Model
     {
         return $this->hasMany(InvoiceLog::class);
     }
+
+    // Метод для генерации порядкового номера договора
+    public function getContractNumberAttribute()
+    {
+        $number = $this->id;
+
+        $formattedDate = date('d.m.Y');
+
+        return "№ {$number}п от {$formattedDate}";
+    }
 }
