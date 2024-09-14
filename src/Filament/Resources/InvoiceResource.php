@@ -198,7 +198,7 @@ class InvoiceResource extends Resource
                                 ->label(trans('filament-invoices::messages.invoices.sections.invoice_data.columns.currency'))
                                 ->required()
                                 ->columnSpanFull()
-                                ->default(Currency::query()->where('iso', 'руб.')->first()?->id)
+                                ->default(Currency::query()->where('iso', 'RUB')->first()?->id)
                                 ->options(Currency::query()->pluck('name', 'id')->toArray()),
                         ])
                         ->columns(2)
