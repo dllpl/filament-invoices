@@ -138,7 +138,7 @@ return [
         'logs' => [
             'title' => 'История счета',
             'single' => 'История счета',
-            'columns' => [ццц
+            'columns' => [
                 'log' => 'Действие',
                 'type' => 'Тип',
                 'created_at' => 'Дата'
