@@ -31,7 +31,7 @@ class CreateInvoice extends CreateRecord
 
         $this->getRecord()->invoiceLogs()->create([
             'log' => "Счет создан (" . auth()->user()->name . ')',
-            'type' => 'created'
+            'type' => 'создание'
         ]);
     }
 }

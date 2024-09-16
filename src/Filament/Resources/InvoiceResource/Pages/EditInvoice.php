@@ -33,7 +33,7 @@ class EditInvoice extends EditRecord
 
         $this->getRecord()->invoiceLogs()->create([
             'log' => "Счет обновлен (" . auth()->user()->name . ')',
-            'type' => 'updated'
+            'type' => 'обновление'
         ]);
     }
 }

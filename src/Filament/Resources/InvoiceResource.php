@@ -514,7 +514,7 @@ class InvoiceResource extends Resource
 
                         $record->invoiceLogs()->create([
                             'log' => 'Оплачено ' . number_format($data['amount'], 2) . ' ' . $record->currency->symbol . ' (' . auth()->user()->name . ')',
-                            'type' => 'payment',
+                            'type' => 'оплата',
                         ]);
 
                         if ($record->total === $record->paid) {

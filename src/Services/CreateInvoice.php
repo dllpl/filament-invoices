@@ -170,8 +170,8 @@ class CreateInvoice
 
 
            $invoice->invoiceLogs()->create([
-               'type' => "created",
-               'log' => 'Invoice created',
+               'type' => "создание",
+               'log' => 'Счет создан',
            ]);
 
            return $invoice;
