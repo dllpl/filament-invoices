@@ -2,7 +2,7 @@
 
 return [
     'invoices' => [
-        'title' => 'Счета',
+        'title' => 'Счета клиентам',
         'single' => 'Счет',
         'group' => 'Финансы',
         'widgets' => [
@@ -199,5 +199,6 @@ return [
             ]
         ],
     ],
+    'back' => 'Назад',
 ];
 
