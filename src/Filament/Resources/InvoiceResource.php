@@ -107,7 +107,7 @@ class InvoiceResource extends Resource
                                 ->label(trans('filament-invoices::messages.invoices.sections.from_type.columns.from'))
                                 ->required()
                                 ->searchable()
-                                ->default(fn(Forms\Get $get) => $get('from_type') ? $get('from_type')::query()->pluck(FilamentInvoices::getFrom()->where('model', $get('from_type'))->first()?->column ?? 'name', 'id')->first() : null)
+                                ->default(1)
                                 ->options(fn(Forms\Get $get) => $get('from_type') ? $get('from_type')::query()->pluck(FilamentInvoices::getFrom()->where('model', $get('from_type'))->first()?->column ?? 'name', 'id')->toArray() : [])
                                 ->columnSpanFull(),
                         ])
@@ -200,7 +200,7 @@ class InvoiceResource extends Resource
                                 ->label(trans('filament-invoices::messages.invoices.sections.invoice_data.columns.currency'))
                                 ->required()
                                 ->columnSpanFull()
-                                ->default(Currency::query()->where('iso', 'руб.')->first()?->id)
+                                ->default(Currency::query()->where('iso', 'RUB')->first()?->id)
                                 ->options(Currency::query()->pluck('name', 'id')->toArray()),
                         ])
                         ->columns(2)
@@ -541,10 +541,10 @@ class InvoiceResource extends Resource
                     ->tooltip(trans('filament-invoices::messages.invoices.actions.edit_invoice')),
                 Tables\Actions\DeleteAction::make()
                     ->iconButton()
-                    ->icon('heroicon-s-archive-box')
-                    ->label(trans('filament-invoices::messages.invoices.actions.archive_invoice'))
-                    ->modalHeading(trans('filament-invoices::messages.invoices.actions.archive_invoice'))
-                    ->tooltip(trans('filament-invoices::messages.invoices.actions.archive_invoice')),
+                    ->icon('heroicon-o-trash')
+                    ->label(trans('filament-invoices::messages.invoices.actions.delete_invoice'))
+                    ->modalHeading(trans('filament-invoices::messages.invoices.actions.delete_invoice'))
+                    ->tooltip(trans('filament-invoices::messages.invoices.actions.delete_invoice')),
                 Tables\Actions\ForceDeleteAction::make()
                     ->iconButton()
                     ->tooltip(trans('filament-invoices::messages.invoices.actions.delete_invoice_forever')),

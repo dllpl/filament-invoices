@@ -110,6 +110,7 @@ return [
             'view_invoice' => 'Просмотреть счет',
             'edit_invoice' => 'Редактировать счет',
             'archive_invoice' => 'Архивировать счет',
+            'delete_invoice' => 'Удалить счет',
             'delete_invoice_forever' => 'Удалить счет навсегда',
             'restore_invoice' => 'Восстановить счет',
             'invoices_status' => 'Статус счетов',
@@ -139,7 +140,7 @@ return [
             'title' => 'История счета',
             'single' => 'История счета',
             'columns' => [
-                'log' => 'Действие',
+                'log' => 'Действия',
                 'type' => 'Тип',
                 'created_at' => 'Дата'
             ],

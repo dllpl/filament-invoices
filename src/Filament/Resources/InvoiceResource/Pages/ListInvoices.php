@@ -9,6 +9,9 @@ use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 use TomatoPHP\FilamentTypes\Models\Type;
 
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Database\Eloquent\Builder;
+
 class ListInvoices extends ListRecords
 {
     protected static string $resource = InvoiceResource::class;
@@ -33,7 +36,9 @@ class ListInvoices extends ListRecords
         return [
             null => Tab::make('Актуальные'),
             'Все счета' => Tab::make()->query(fn ($query) => $query->whereNotNull('deleted_at')->orWhereNull('deleted_at')),
-            'Удаленые' => Tab::make()->query(fn ($query) => $query->whereNotNull('deleted_at')),
+            'Удаленные' => Tab::make()->query(fn (Builder $query) => $query->withoutGlobalScopes([
+                SoftDeletingScope::class,
+            ])),
         ];
     }
 
