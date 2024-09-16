@@ -32,7 +32,7 @@ class EditInvoice extends EditRecord
         $this->getRecord()->update($data);
 
         $this->getRecord()->invoiceLogs()->create([
-            'log' => "Invoice Updated By: " . auth()->user()->name,
+            'log' => "Счет обновлен (" . auth()->user()->name . ')',
             'type' => 'updated'
         ]);
     }

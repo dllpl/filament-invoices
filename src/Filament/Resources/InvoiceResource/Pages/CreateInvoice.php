@@ -30,7 +30,7 @@ class CreateInvoice extends CreateRecord
         $this->getRecord()->update($data);
 
         $this->getRecord()->invoiceLogs()->create([
-            'log' => "Invoice created By: " . auth()->user()->name,
+            'log' => "Счет создан (" . auth()->user()->name . ')',
             'type' => 'created'
         ]);
     }

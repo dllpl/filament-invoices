@@ -513,7 +513,7 @@ class InvoiceResource extends Resource
                         ]);
 
                         $record->invoiceLogs()->create([
-                            'log' => 'Paid ' . number_format($data['amount'], 2) . ' ' . $record->currency->iso . ' By: ' . auth()->user()->name,
+                            'log' => 'Оплачено ' . number_format($data['amount'], 2) . ' ' . $record->currency->symbol . ' (' . auth()->user()->name . ')',
                             'type' => 'payment',
                         ]);
 

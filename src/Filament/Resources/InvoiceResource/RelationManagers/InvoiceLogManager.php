@@ -58,7 +58,7 @@ class InvoiceLogManager extends RelationManager
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label(trans('filament-invoices::messages.invoices.logs.columns.created_at'))
-                    ->dateTime()
+                    ->dateTime('d.m.Y H:i:s')
                     ->sortable()
             ])
             ->filters([

@@ -136,12 +136,12 @@ return [
             ],
         ],
         'logs' => [
-            'title' => 'Логи счета',
-            'single' => 'Лог счета',
-            'columns' => [
-                'log' => 'Лог',
+            'title' => 'История счета',
+            'single' => 'История счета',
+            'columns' => [ццц
+                'log' => 'Действие',
                 'type' => 'Тип',
-                'created_at' => 'Создано'
+                'created_at' => 'Дата'
             ],
         ],
         'payments' => [
