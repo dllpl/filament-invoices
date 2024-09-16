@@ -35,10 +35,12 @@ class ListInvoices extends ListRecords
     {
         return [
             null => Tab::make('Актуальные'),
-            'Все счета' => Tab::make()->query(fn ($query) => $query->whereNotNull('deleted_at')->orWhereNull('deleted_at')),
-            'Удаленные' => Tab::make()->query(fn (Builder $query) => $query->withoutGlobalScopes([
-                SoftDeletingScope::class,
-            ])),
+            'Все счета' => Tab::make()->query(fn (Builder $query) => $query->withTrashed()),
+            'Оплаченные' => Tab::make()->query(fn (Builder $query) => $query->withTrashed()->where('status', 'paid')),
+            'Не оплаченные' => Tab::make()->query(fn (Builder $query) =>
+            $query->withTrashed()->whereNotIn('status', ['paid', 'draft'])
+            ),
+            'Удаленные' => Tab::make()->query(fn (Builder $query) => $query->onlyTrashed()),
         ];
     }
 
