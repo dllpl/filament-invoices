@@ -36,7 +36,9 @@ class InvoiceResource extends Resource
 {
     protected static ?string $model = Invoice::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static ?string $navigationIcon = 'heroicon-o-banknotes';
+
+    protected static ?int $navigationSort = 5;
 
 
     public static function getNavigationLabel(): string
@@ -105,7 +107,7 @@ class InvoiceResource extends Resource
                                 ->label(trans('filament-invoices::messages.invoices.sections.from_type.columns.from'))
                                 ->required()
                                 ->searchable()
-                                ->default(fn(Forms\Get $get) => $get('from_type') ? $get('from_type')::query()->pluck(FilamentInvoices::getFrom()->where('model', $get('from_type'))->first()?->column ?? 'id')->first() : null)
+                                ->default(fn(Forms\Get $get) => $get('from_type') ? $get('from_type')::query()->pluck(FilamentInvoices::getFrom()->where('model', $get('from_type'))->first()?->column ?? 'name', 'id')->first() : null)
                                 ->options(fn(Forms\Get $get) => $get('from_type') ? $get('from_type')::query()->pluck(FilamentInvoices::getFrom()->where('model', $get('from_type'))->first()?->column ?? 'name', 'id')->toArray() : [])
                                 ->columnSpanFull(),
                         ])
@@ -198,7 +200,7 @@ class InvoiceResource extends Resource
                                 ->label(trans('filament-invoices::messages.invoices.sections.invoice_data.columns.currency'))
                                 ->required()
                                 ->columnSpanFull()
-                                ->default(Currency::query()->where('iso', 'RUB')->first()?->id)
+                                ->default(Currency::query()->where('iso', 'руб.')->first()?->id)
                                 ->options(Currency::query()->pluck('name', 'id')->toArray()),
                         ])
                         ->columns(2)
