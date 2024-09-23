@@ -12,8 +12,13 @@ use TomatoPHP\FilamentTypes\Models\Type;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Database\Eloquent\Builder;
 
+use Filament\Pages\Concerns\ExposesTableToWidgets;
+
 class ListInvoices extends ListRecords
 {
+
+    use ExposesTableToWidgets;
+
     protected static string $resource = InvoiceResource::class;
 
 

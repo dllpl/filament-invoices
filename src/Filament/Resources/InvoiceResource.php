@@ -5,6 +5,7 @@ namespace TomatoPHP\FilamentInvoices\Filament\Resources;
 use App\Models\User;
 use Carbon\Carbon;
 use Filament\Notifications\Notification;
+use Filament\Tables\Columns\Summarizers\Sum;
 use Filament\Tables\Enums\ActionsPosition;
 use Illuminate\Support\Collection;
 use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
@@ -384,6 +385,14 @@ class InvoiceResource extends Resource
                     ->money(locale: 'ru', currency: (fn($record) => $record->currency?->iso))
                     ->color('success')
                     ->sortable(),
+                Tables\Columns\TextColumn::make('total')
+                    ->label('Сумма')
+                    ->summarize(Sum::make()->label('Всего сумма')->money(currency: 'RUB', locale: 'ru'))
+                    ->money(currency: 'RUB', locale: 'ru'),
+                Tables\Columns\TextColumn::make('paid')
+                    ->label('Оплачено')
+                    ->money(currency: 'RUB', locale: 'ru')
+                    ->summarize(Sum::make()->label('Всего оплачено')->money(currency: 'RUB', locale: 'ru')),
 
 //                Tables\Columns\TextColumn::make('updated_at')
 //                    ->label(trans('filament-invoices::messages.invoices.columns.updated_at'))
