@@ -157,7 +157,7 @@ class InvoiceResource extends Resource
                             Forms\Components\TextInput::make('phone')
                                 ->label(trans('filament-invoices::messages.invoices.sections.customer_data.columns.phone'))
                                 ->type('tel')
-                                ->required()
+//                                ->required()
                                 ->mask('+7 (999) 999-99-99')
                                 ->maxLength(255),
                             Forms\Components\TextInput::make('inn')
