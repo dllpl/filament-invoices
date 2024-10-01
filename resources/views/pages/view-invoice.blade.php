@@ -200,7 +200,7 @@
                             <tr>
                                 <td>{{$this->getRecord()->billedFor?->name}}</td>
                                 <td>{{$this->getRecord()->billedFor?->inn}}</td>
-                                <td>{{$this->getRecord()->billedFor?->inn}}</td>
+                                <td></td>
                                 <td>{{$this->getRecord()->billedFor?->ogrn}}</td>
                             </tr>
                             </tbody>
