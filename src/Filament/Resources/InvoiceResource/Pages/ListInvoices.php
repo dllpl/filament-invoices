@@ -52,7 +52,9 @@ class ListInvoices extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+                ->icon('heroicon-m-plus-circle')
+                ->label('Новый счет'),
             Actions\Action::make('setting')
                 ->hiddenLabel()
                 ->tooltip(trans('filament-invoices::messages.invoices.actions.invoices_status'))

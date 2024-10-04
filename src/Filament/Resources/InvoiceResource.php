@@ -392,7 +392,7 @@ class InvoiceResource extends Resource
                 Tables\Columns\TextColumn::make('paid')
                     ->label('Оплачено')
                     ->money(currency: 'RUB', locale: 'ru')
-                    ->summarize(Sum::make()->label('Всего оплачено')->money(currency: 'RUB', locale: 'ru')),
+                    ->summarize(Sum::make()->label('Всего получено')->money(currency: 'RUB', locale: 'ru')),
 
 //                Tables\Columns\TextColumn::make('updated_at')
 //                    ->label(trans('filament-invoices::messages.invoices.columns.updated_at'))
