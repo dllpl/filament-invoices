@@ -335,9 +335,9 @@ class InvoiceResource extends Resource
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('due_date')
                     ->label(trans('filament-invoices::messages.invoices.columns.due_date'))
-                    ->tooltip(fn($record) => ($record->due_date->isFuture() && $record->status === 'paid')  || $record->status === 'paid' ? $record->due_date->diffForHumans() : ($record->due_date->isToday() ? 'Оплата сегодня!' : 'Просрочено!'))
-                    ->color(fn($record) => ($record->due_date->isFuture() && $record->status === 'paid')  || $record->status === 'paid' ? 'success' : ($record->due_date->isToday() ? 'warning' : 'danger'))
-                    ->icon(fn($record) => ($record->due_date->isFuture() && $record->status === 'paid')   || $record->status === 'paid' ? 'heroicon-s-check-circle' : ($record->due_date->isToday() ? 'heroicon-s-exclamation-circle' : 'heroicon-s-x-circle'))
+                    ->tooltip(fn($record) => ($record->due_date->isFuture() && $record->status === 'paid')  || $record->status === 'paid' ? $record->due_date->diffForHumans() : ($record->due_date->isToday() ? 'Оплата сегодня!' : ($record->due_date->isFuture() ? 'Оплата через ' . $record->due_date->diffForHumans() :  'Просрочено!')))
+                    ->color(fn($record) => ($record->due_date->isFuture() && $record->status === 'paid')  || $record->status === 'paid' ? 'success' : ($record->due_date->isToday() ? 'warning' : ($record->due_date->isFuture() ? 'warning' :  'danger')))
+                    ->icon(fn($record) => ($record->due_date->isFuture() && $record->status === 'paid')   || $record->status === 'paid' ? 'heroicon-s-check-circle' : ($record->due_date->isToday() ? 'heroicon-s-exclamation-circle' : ($record->due_date->isFuture() ? 'heroicon-s-exclamation-circle' : 'heroicon-s-x-circle') ))
                     ->date('d.m.Y')
                     ->sortable()
                     ->toggleable(),
