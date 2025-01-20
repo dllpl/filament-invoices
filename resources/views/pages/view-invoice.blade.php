@@ -140,7 +140,7 @@
                             </tr>
                             <tr class="align-top">
                                 <td class="font-bold">Почтовый адрес:</td>
-                                <td class="w-4">420111, Республика Татарстан, <br> г. Казань, Жуковского 8/50, офис 315</td>
+                                <td class="w-4">420111, Республика Татарстан, <br> г. Казань, Техническая 64</td>
                             </tr>
                             <tr class="align-top">
                                 <td class="font-bold">ИНН:</td>
@@ -674,6 +674,7 @@
             @endif
         </div>
     </x-filament-panels::page>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
         td,th {
@@ -685,6 +686,10 @@
     </style>
 
     <style type="text/css" media="print">
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
 
         .print-custom {
             display: flex;
