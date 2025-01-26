@@ -46,6 +46,11 @@ class ListInvoices extends ListRecords
         ];
     }
 
+    public function getDefaultActiveTab(): string|int|null
+    {
+        return 'Текущий месяц';
+    }
+
     protected function getHeaderActions(): array
     {
         return [
