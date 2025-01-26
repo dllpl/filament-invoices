@@ -407,6 +407,9 @@ class InvoiceResource extends Resource
                     ->displayFormat('DD.MM.YYYY')
                     ->firstDayOfWeek(1)
                     ->autoApply(),
+                Tables\Filters\SelectFilter::make('status')
+                    ->label(trans('filament-invoices::messages.invoices.columns.status'))
+                    ->options(fn() => Type::query()->where('for', 'invoices')->where('type', 'status')->pluck('name', 'key')->toArray()),
 //                Tables\Filters\TrashedFilter::make(),
 //                Tables\Filters\SelectFilter::make('status')
 //                    ->options(Type::query()->where('for', 'invoices')->where('type', 'status')->pluck('name', 'key')->toArray())

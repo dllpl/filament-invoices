@@ -39,13 +39,10 @@ class ListInvoices extends ListRecords
     public function getTabs(): array
     {
         return [
-            null => Tab::make('Актуальные'),
-            'Все счета' => Tab::make()->query(fn (Builder $query) => $query->withTrashed()),
-            'Оплаченные' => Tab::make()->query(fn (Builder $query) => $query->withTrashed()->where('status', 'paid')),
-            'Не оплаченные' => Tab::make()->query(fn (Builder $query) =>
-            $query->withTrashed()->whereNotIn('status', ['paid', 'draft'])
-            ),
-            'Удаленные' => Tab::make()->query(fn (Builder $query) => $query->onlyTrashed()),
+            'Сегодня' => Tab::make()->query(fn(Builder $query) => $query->whereDate('created_at', today())),
+            'Текущий месяц' => Tab::make()->query(fn(Builder $query) => $query->whereMonth('created_at', now()->month)),
+            'Прошлый месяц' => Tab::make()->query(fn(Builder $query) => $query->whereMonth('created_at', now()->subMonth()->month)),
+            'Год' => Tab::make()->query(fn(Builder $query) => $query->whereYear('created_at', now()->year)),
         ];
     }
 
