@@ -43,6 +43,7 @@ class ListInvoices extends ListRecords
             'Текущий месяц' => Tab::make()->query(fn(Builder $query) => $query->whereMonth('created_at', now()->month)),
             'Прошлый месяц' => Tab::make()->query(fn(Builder $query) => $query->whereMonth('created_at', now()->subMonth()->month)),
             'Год' => Tab::make()->query(fn(Builder $query) => $query->whereYear('created_at', now()->year)),
+            'Прошлый год' => Tab::make()->query(fn(Builder $query) => $query->whereYear('created_at', now()->subYear()->year)),
         ];
     }
 
